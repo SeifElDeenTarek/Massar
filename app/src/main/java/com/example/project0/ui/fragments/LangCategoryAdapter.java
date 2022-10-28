@@ -1,4 +1,4 @@
-package com.example.project0.ui.courses;
+package com.example.project0.ui.fragments;
 
 import android.view.LayoutInflater;
 import android.view.View;

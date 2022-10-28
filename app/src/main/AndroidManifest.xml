@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/app_name_ar">
@@ -19,17 +18,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.courses.CoursesActivity"
             android:label="@string/home_courses"
             android:parentActivityName=".ui.home.HomeActivity" />
-
         <activity
             android:name=".ui.testYS.TestYourselfActivity"
             android:label="@string/home_test_yourself"
-            android:parentActivityName=".ui.home.HomeActivity"/>
-
+            android:parentActivityName=".ui.home.HomeActivity" />
+        <activity
+            android:name=".ui.examPrep.ExamPrepActivity"
+            android:label="@string/home_exam_prep"
+            android:parentActivityName=".ui.home.HomeActivity" />
+        <activity
+            android:name=".ui.finalTrain.FinalTrainActivity"
+            android:label="@string/home_voc_training"
+            android:parentActivityName=".ui.home.HomeActivity" />
     </application>
 
 </manifest>

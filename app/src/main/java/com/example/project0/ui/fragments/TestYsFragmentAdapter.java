@@ -1,4 +1,4 @@
-package com.example.project0.ui.courses;
+package com.example.project0.ui.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -6,11 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class FragmentAdapter extends FragmentStateAdapter
+public class TestYsFragmentAdapter extends FragmentStateAdapter
 {
-
-
-    public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle)
+    public TestYsFragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle)
     {
         super(fragmentManager, lifecycle);
     }
@@ -20,6 +18,10 @@ public class FragmentAdapter extends FragmentStateAdapter
     public Fragment createFragment(int position)
     {
         if (position == 0)
+        {
+            return new TestYsSelectFragment();
+        }
+        else if (position == 1)
         {
             return new LangLevelFragment();
         }
@@ -32,6 +34,6 @@ public class FragmentAdapter extends FragmentStateAdapter
     @Override
     public int getItemCount()
     {
-        return 2;
+        return 3;
     }
 }

@@ -1,10 +1,11 @@
-package com.example.project0.ui.courses;
+package com.example.project0.ui.fragments;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.project0.pojo.LangCategoryModel;
 import com.example.project0.pojo.LangLevelModel;
+import com.example.project0.pojo.TestYsSelectModel;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class LangViewModel extends ViewModel
 {
     public MutableLiveData<ArrayList<LangLevelModel>> langLevelList = new MutableLiveData<>();
     public MutableLiveData<ArrayList<LangCategoryModel>> langCategoryList = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<TestYsSelectModel>> testYsSelectList = new MutableLiveData<>();
 
     public void getLangLevelList()
     {
@@ -21,6 +23,11 @@ public class LangViewModel extends ViewModel
     public void getLangCategoryList()
     {
         langCategoryList.setValue(getLangCategoryListFromDatabase());
+    }
+
+    public void getTestYsSelectList()
+    {
+        testYsSelectList.setValue(getTestYsSelectListFromDatabase());
     }
 
     private ArrayList<LangLevelModel> getLangLevelListFromDatabase()
@@ -41,10 +48,21 @@ public class LangViewModel extends ViewModel
     {
         ArrayList<LangCategoryModel> langCategoryList = new ArrayList<>();
 
-        langCategoryList.add(new LangCategoryModel("مفردات"));
-        langCategoryList.add(new LangCategoryModel("جمل"));
         langCategoryList.add(new LangCategoryModel("قواعد"));
+        langCategoryList.add(new LangCategoryModel("جمل"));
+        langCategoryList.add(new LangCategoryModel("مفردات"));
+        langCategoryList.add(new LangCategoryModel("محادثة"));
 
         return langCategoryList;
+    }
+
+    private ArrayList<TestYsSelectModel> getTestYsSelectListFromDatabase()
+    {
+        ArrayList<TestYsSelectModel> testYsSelectList = new ArrayList<>();
+
+        testYsSelectList.add(new TestYsSelectModel("حسب المستوي"));
+        testYsSelectList.add(new TestYsSelectModel("بشكل عام"));
+
+        return testYsSelectList;
     }
 }

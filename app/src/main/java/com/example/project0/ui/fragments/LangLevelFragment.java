@@ -1,4 +1,4 @@
-package com.example.project0.ui.courses;
+package com.example.project0.ui.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +19,7 @@ import com.example.project0.R;
 import com.example.project0.pojo.LangLevelModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.StateSet.TAG;
 
@@ -33,7 +34,7 @@ public class LangLevelFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.lang_level, container, false);
+        View rootView = inflater.inflate(R.layout.lang_level_fragment, container, false);
 
         String activityName = getActivity().getClass().getSimpleName();
         int containerID = R.id.courses_container;
@@ -41,6 +42,13 @@ public class LangLevelFragment extends Fragment
         if(activityName.equals("TestYourselfActivity"))
         {
             containerID = R.id.testYS_container;
+        }
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null)
+        {
+            String type = bundle.getString("type");
+            Log.d(TAG, "onCreateView: " + type);
         }
 
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
@@ -68,7 +76,7 @@ public class LangLevelFragment extends Fragment
                         Bundle bundle = new Bundle();
                         bundle.putString("level", langLevelModel.getLangLevel());
                         fragment.setArguments(bundle);
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(finalContainerID, fragment);
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -78,7 +86,6 @@ public class LangLevelFragment extends Fragment
                 });
             }
         });
-
         return rootView;
     }
 }

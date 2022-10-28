@@ -1,12 +1,10 @@
-package com.example.project0.ui.courses;
+package com.example.project0.ui.fragments;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.LangCategoryModel;
-import com.example.project0.pojo.LangLevelModel;
 
 import java.util.ArrayList;
 
@@ -34,10 +31,12 @@ public class LangCategoryFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.lang_category, container, false);
+        View rootView = inflater.inflate(R.layout.lang_category_fragment, container, false);
 
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
         langViewModel.getLangCategoryList();
+
+        String activityName = getActivity().getClass().getSimpleName();
 
         Bundle bundle = this.getArguments();
         if(bundle != null)
@@ -45,7 +44,6 @@ public class LangCategoryFragment extends Fragment
             String level = bundle.getString("level");
             Log.d(TAG, "onCreateView: " + level);
         }
-
 
         RecyclerView langRecycler = rootView.findViewById(R.id.lang_category_recycler);
         final LangCategoryAdapter langCategoryAdapter = new LangCategoryAdapter();
@@ -57,6 +55,10 @@ public class LangCategoryFragment extends Fragment
             @Override
             public void onChanged(ArrayList<LangCategoryModel> langCategoryModels)
             {
+                if(activityName.equals("TestYourselfActivity"))
+                {
+                    langCategoryModels = new ArrayList<>(langCategoryModels.subList(0, 3));
+                }
                 langCategoryAdapter.setList(langCategoryModels, new LangCategoryAdapter.itemClickListener()
                 {
                     @Override
@@ -66,7 +68,6 @@ public class LangCategoryFragment extends Fragment
                 });
             }
         });
-
         return rootView;
     }
 }
