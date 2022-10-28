@@ -1,5 +1,6 @@
 package com.example.project0.ui.home;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -8,13 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 
 import com.example.project0.R;
 import com.example.project0.pojo.HomeModel;
 import com.example.project0.ui.courses.CoursesActivity;
+import com.example.project0.ui.examPrep.ExamPrepActivity;
+import com.example.project0.ui.finalTrain.FinalTrainActivity;
 import com.example.project0.ui.testYS.TestYourselfActivity;
 
 import java.util.ArrayList;
@@ -31,13 +37,22 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        getWindow().setStatusBarColor(Color.parseColor("#FDBB2F"));
+        ActionBar actionBar;
+        getSupportActionBar().setElevation(0);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle(Html.fromHtml("<font color='#000000'</font>"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#FDBB2F"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel.getHomeListData();
 
         RecyclerView homeRecycler = findViewById(R.id.home_recycler);
         HomeAdapter homeAdapter = new HomeAdapter();
+        homeRecycler.setLayoutManager(new LinearLayoutManager(this));
         homeRecycler.setAdapter(homeAdapter);
 
-        homeViewModel.getHomeListData();
 
         homeViewModel.homeList.observe(this, new Observer<ArrayList<HomeModel>>()
         {
@@ -54,8 +69,6 @@ public class HomeActivity extends AppCompatActivity
                 });
             }
         });
-
-        homeRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public Intent intent(int name)
@@ -69,6 +82,14 @@ public class HomeActivity extends AppCompatActivity
                 return intent;
             case R.string.home_test_yourself:
                 intent = new Intent(this, TestYourselfActivity.class);
+                startActivity(intent);
+                return intent;
+            case R.string.home_exam_prep:
+                intent = new Intent(this, ExamPrepActivity.class);
+                startActivity(intent);
+                return intent;
+            case R.string.home_voc_training:
+                intent = new Intent(this, FinalTrainActivity.class);
                 startActivity(intent);
                 return intent;
         }
