@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mssar</string>
+    <string name="app_name_ar">مسار</string>
+
+    <string name="home_courses">كورسات</string>
+    <string name="home_test_yourself">اختبر نفسك</string>
+    <string name="home_exam_prep">تحضير للامتحان</string>
+    <string name="home_voc_training">تدريب نهائي</string>
+    <string name="image_content_desc">Image Content Desc.</string>
+</resources>
