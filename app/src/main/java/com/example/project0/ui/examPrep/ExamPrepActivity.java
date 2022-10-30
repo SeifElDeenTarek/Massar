@@ -1,11 +1,10 @@
 package com.example.project0.ui.examPrep;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.project0.R;
 import com.example.project0.ui.fragments.ExamPrepFragmentAdapter;
@@ -25,7 +24,6 @@ public class ExamPrepActivity extends AppCompatActivity
         ViewPager2 viewPager = findViewById(R.id.exam_prep__view_pager);
         ExamPrepFragmentAdapter examPrepFragmentAdapter = new ExamPrepFragmentAdapter(getSupportFragmentManager(), getLifecycle());
         viewPager.setAdapter(examPrepFragmentAdapter);
-
         viewPager.setUserInputEnabled(false);
 
         //Add back navigation in the title bar

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class LangLevelAdapter extends RecyclerView.Adapter<LangLevelAdapter.LangViewHolder>
 {
     private ArrayList<LangLevelModel> langLevelModels = new ArrayList<>();
-    private LangLevelAdapter.itemClickListener itemClickListener;
+    private itemClickListener itemClickListener;
 
     @NonNull
     @Override

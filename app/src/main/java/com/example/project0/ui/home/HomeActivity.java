@@ -1,17 +1,13 @@
 package com.example.project0.ui.home;
 
-import androidx.appcompat.app.ActionBar;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.text.Html;
 
 import com.example.project0.R;
 import com.example.project0.pojo.HomeModel;
@@ -33,13 +29,17 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+/**
         getWindow().setStatusBarColor(Color.parseColor("#453F6B"));
         ActionBar actionBar;
-        Objects.requireNonNull(getSupportActionBar()).hide();
+
         actionBar = getSupportActionBar();
         actionBar.setTitle(Html.fromHtml("<font color='#453F6B'</font>"));
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#453F6B"));
         actionBar.setBackgroundDrawable(colorDrawable);
+**/
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         homeViewModel.getHomeListData();
@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity
         HomeAdapter homeAdapter = new HomeAdapter();
         homeRecycler.setLayoutManager(new LinearLayoutManager(this));
         homeRecycler.setAdapter(homeAdapter);
-
 
         homeViewModel.homeList.observe(this, new Observer<ArrayList<HomeModel>>()
         {

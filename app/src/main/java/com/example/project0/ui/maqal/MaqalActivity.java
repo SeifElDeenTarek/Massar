@@ -1,11 +1,10 @@
 package com.example.project0.ui.maqal;
 
-import androidx.appcompat.app.ActionBar;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 
 import com.example.project0.R;
 import com.example.project0.pojo.MaqalModel;

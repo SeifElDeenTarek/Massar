@@ -1,15 +1,13 @@
 package com.example.project0.ui.courses;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.project0.R;
 import com.example.project0.ui.fragments.CoursesFragmentAdapter;
-import com.example.project0.ui.fragments.TestYsFragmentAdapter;
 
 import java.util.Objects;
 
@@ -27,7 +25,6 @@ public class CoursesActivity extends AppCompatActivity
         CoursesFragmentAdapter fragmentAdapter = new CoursesFragmentAdapter(getSupportFragmentManager(), getLifecycle());
         viewPager.setAdapter(fragmentAdapter);
         viewPager.setUserInputEnabled(false);
-
 
         //Add back navigation in the title bar
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

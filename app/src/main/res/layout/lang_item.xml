@@ -24,7 +24,8 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             tools:text="A1"
             android:textAlignment="center"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
