@@ -4,7 +4,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,19 +12,16 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
-import android.view.View;
 
 import com.example.project0.R;
 import com.example.project0.pojo.HomeModel;
 import com.example.project0.ui.courses.CoursesActivity;
 import com.example.project0.ui.examPrep.ExamPrepActivity;
-import com.example.project0.ui.finalTrain.FinalTrainActivity;
+import com.example.project0.ui.maqal.MaqalActivity;
 import com.example.project0.ui.testYS.TestYourselfActivity;
 
 import java.util.ArrayList;
-
-import static androidx.constraintlayout.widget.StateSet.TAG;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity
 {
@@ -37,12 +33,12 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        getWindow().setStatusBarColor(Color.parseColor("#FDBB2F"));
+        getWindow().setStatusBarColor(Color.parseColor("#453F6B"));
         ActionBar actionBar;
-        getSupportActionBar().setElevation(0);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         actionBar = getSupportActionBar();
-        actionBar.setTitle(Html.fromHtml("<font color='#000000'</font>"));
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#FDBB2F"));
+        actionBar.setTitle(Html.fromHtml("<font color='#453F6B'</font>"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#453F6B"));
         actionBar.setBackgroundDrawable(colorDrawable);
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -88,8 +84,8 @@ public class HomeActivity extends AppCompatActivity
                 intent = new Intent(this, ExamPrepActivity.class);
                 startActivity(intent);
                 return intent;
-            case R.string.home_voc_training:
-                intent = new Intent(this, FinalTrainActivity.class);
+            case R.string.home_maqal:
+                intent = new Intent(this, MaqalActivity.class);
                 startActivity(intent);
                 return intent;
         }

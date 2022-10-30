@@ -31,8 +31,8 @@
             android:label="@string/home_exam_prep"
             android:parentActivityName=".ui.home.HomeActivity" />
         <activity
-            android:name=".ui.finalTrain.FinalTrainActivity"
-            android:label="@string/home_voc_training"
+            android:name=".ui.maqal.MaqalActivity"
+            android:label="@string/home_maqal"
             android:parentActivityName=".ui.home.HomeActivity" />
     </application>
 

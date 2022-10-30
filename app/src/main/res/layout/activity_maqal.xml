@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.finalTrain.FinalTrainActivity">
+    tools:context=".ui.maqal.MaqalActivity"
+    android:padding="8dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/maqal_recycler"/>
 
 </LinearLayout>

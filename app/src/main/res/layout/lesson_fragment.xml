@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/test_ys_frag_container"
     android:background="@color/primary">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/test_ys_recycler"/>
+        android:id="@+id/lesson_recycler" />
+
 </LinearLayout>

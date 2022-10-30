@@ -24,7 +24,7 @@ public class HomeViewModel extends ViewModel
         homeModels.add(new HomeModel(R.drawable.courses, R.string.home_courses));
         homeModels.add(new HomeModel(R.drawable.exams, R.string.home_test_yourself));
         homeModels.add(new HomeModel(R.drawable.exams_prep, R.string.home_exam_prep));
-        homeModels.add(new HomeModel(R.drawable.voc_training, R.string.home_voc_training));
+        homeModels.add(new HomeModel(R.drawable.articles, R.string.home_maqal));
 
         return homeModels;
     }

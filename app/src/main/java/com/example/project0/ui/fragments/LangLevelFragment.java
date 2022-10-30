@@ -43,25 +43,23 @@ public class LangLevelFragment extends Fragment
         {
             containerID = R.id.testYS_container;
         }
-
-        Bundle bundle = this.getArguments();
-        if(bundle != null)
+        else if(activityName.equals("ExamPrepActivity"))
         {
-            String type = bundle.getString("type");
-            Log.d(TAG, "onCreateView: " + type);
+            containerID = R.id.exam_prep_container;
         }
 
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
         langViewModel.getLangLevelList();
-
-        Log.d(TAG, "onCreateView: " + containerID + activityName);
 
         RecyclerView langRecycler = rootView.findViewById(R.id.lang_level_recycler);
         final LangLevelAdapter langLevelAdapter = new LangLevelAdapter();
         langRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         langRecycler.setAdapter(langLevelAdapter);
 
+        Log.d(TAG, "onCreateView: " + containerID + activityName);
+
         int finalContainerID = containerID;
+
         langViewModel.langLevelList.observe(getViewLifecycleOwner(), new Observer<ArrayList<LangLevelModel>>()
         {
             @Override
@@ -72,10 +70,15 @@ public class LangLevelFragment extends Fragment
                     @Override
                     public void onItemClick(LangLevelModel langLevelModel)
                     {
-                        Fragment fragment = new LangCategoryFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("level", langLevelModel.getLangLevel());
-                        fragment.setArguments(bundle);
+                        Fragment fragment = new LessonFragment();
+                        //Bundle bundle = new Bundle();
+                        //bundle.putString("level", langLevelModel.getLangLevel());
+                        //fragment.setArguments(bundle);
+                        if(!activityName.equals("ExamPrepActivity"))
+                        {
+                            fragment = new LangCategoryFragment();
+                            Log.d(TAG, "onCreateView: ");
+                        }
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(finalContainerID, fragment);
