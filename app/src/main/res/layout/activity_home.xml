@@ -22,7 +22,7 @@
             android:layout_weight="1"
             android:padding="20dp"
             android:contentDescription="@string/image_content_desc"
-            android:src="@drawable/temp_icon"
+            android:src="@drawable/app_icon"
             android:id="@+id/icon"/>
 
         <TextView

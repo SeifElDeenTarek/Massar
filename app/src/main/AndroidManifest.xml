@@ -34,6 +34,9 @@
             android:name=".ui.maqal.MaqalActivity"
             android:label="@string/home_maqal"
             android:parentActivityName=".ui.home.HomeActivity" />
+        <activity
+            android:name=".ui.PdfActivity"
+            android:parentActivityName=".ui.maqal.MaqalActivity"/>
     </application>
 
 </manifest>

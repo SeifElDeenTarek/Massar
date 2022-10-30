@@ -1,19 +1,26 @@
 package com.example.project0.ui.maqal;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.MaqalModel;
+import com.example.project0.ui.PdfActivity;
+import com.example.project0.ui.fragments.LangViewModel;
+import com.example.project0.ui.home.HomeActivity;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MaqalActivity extends AppCompatActivity
 {
+    LangViewModel langViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,20 +29,43 @@ public class MaqalActivity extends AppCompatActivity
 
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
 
-        ArrayList<MaqalModel> maqalList = testMaqal();
+        langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
+        langViewModel.getMaqalList();
 
         RecyclerView maqalRecycler = findViewById(R.id.maqal_recycler);
         MaqalAdapter maqalAdapter = new MaqalAdapter();
         maqalRecycler.setLayoutManager(new LinearLayoutManager(this));
-        maqalAdapter.setList(maqalList, new MaqalAdapter.itemClickListener()
+        maqalRecycler.setAdapter(maqalAdapter);
+
+        langViewModel.maqalList.observe(this, new Observer<ArrayList<MaqalModel>>()
         {
             @Override
-            public void onItemClick(MaqalModel maqalModel)
+            public void onChanged(ArrayList<MaqalModel> maqalModels)
             {
+                maqalAdapter.setList(maqalModels, new MaqalAdapter.itemClickListener()
+                {
+                    @Override
+                    public void onItemClick(MaqalModel maqalModel)
+                    {
+                        intent();
+                    }
+                });
             }
-        }
-        );
-        maqalRecycler.setAdapter(maqalAdapter);
+        });
+    }
+
+    private void intent()
+    {
+        Intent intent = new Intent(this, PdfActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 
     private ArrayList<MaqalModel> testMaqal()

@@ -29,6 +29,10 @@ public class MaqalAdapter extends RecyclerView.Adapter<MaqalAdapter.MaqalViewHol
     public void onBindViewHolder(@NonNull MaqalViewHolder holder, int position)
     {
         holder.maqalSelect.setText(maqalModels.get(position).getMaqalName());
+
+        holder.itemView.setOnClickListener(v -> {
+            itemClickListener.onItemClick(maqalModels.get(position));
+        });
     }
 
     public void setList(ArrayList<MaqalModel> sectionList, itemClickListener itemClickListener)

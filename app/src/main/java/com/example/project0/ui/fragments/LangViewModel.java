@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.project0.pojo.LangCategoryModel;
 import com.example.project0.pojo.LangLevelModel;
 import com.example.project0.pojo.LessonModel;
+import com.example.project0.pojo.MaqalModel;
 import com.example.project0.pojo.TestYsSelectModel;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class LangViewModel extends ViewModel
     public MutableLiveData<ArrayList<LangCategoryModel>> langCategoryList = new MutableLiveData<>();
     public MutableLiveData<ArrayList<TestYsSelectModel>> testYsSelectList = new MutableLiveData<>();
     public MutableLiveData<ArrayList<LessonModel>> lessonList = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<MaqalModel>> maqalList = new MutableLiveData<>();
 
     public void getLangLevelList()
     {
@@ -34,6 +36,11 @@ public class LangViewModel extends ViewModel
     public void getLessonList()
     {
         lessonList.setValue(getLessonListFromDatabase());
+    }
+
+    public void getMaqalList()
+    {
+        maqalList.setValue(getMaqalListFromDatabase());
     }
 
     private ArrayList<LangLevelModel> getLangLevelListFromDatabase()
@@ -87,5 +94,24 @@ public class LangViewModel extends ViewModel
         lessonModels.add(new LessonModel("درس 9"));
 
         return lessonModels;
+    }
+
+    private ArrayList<MaqalModel> getMaqalListFromDatabase()
+    {
+        ArrayList<MaqalModel> models = new ArrayList<>();
+
+        models.add(new MaqalModel("Name 1"));
+        models.add(new MaqalModel("Name 2"));
+        models.add(new MaqalModel("Name 3"));
+        models.add(new MaqalModel("Name 4"));
+        models.add(new MaqalModel("Name 5"));
+        models.add(new MaqalModel("Name 6"));
+        models.add(new MaqalModel("Name 7"));
+        models.add(new MaqalModel("Name 8"));
+        models.add(new MaqalModel("Name 9"));
+        models.add(new MaqalModel("Name 10"));
+        models.add(new MaqalModel("Name 11"));
+
+        return models;
     }
 }
