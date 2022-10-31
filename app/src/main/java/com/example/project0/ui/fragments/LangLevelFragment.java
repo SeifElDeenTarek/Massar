@@ -35,8 +35,17 @@ public class LangLevelFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.lang_level_fragment, container, false);
+        String testType = null;
 
         String activityName = getActivity().getClass().getSimpleName();
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null)
+        {
+            testType = bundle.getString("type");
+            Log.d(TAG, "onCreateView: " + testType);
+        }
+
         int containerID = R.id.courses_container;
 
         if(activityName.equals("TestYourselfActivity"))
@@ -59,6 +68,7 @@ public class LangLevelFragment extends Fragment
         Log.d(TAG, "onCreateView: " + containerID + activityName);
 
         int finalContainerID = containerID;
+        String finalTestType = testType;
 
         langViewModel.langLevelList.observe(getViewLifecycleOwner(), new Observer<ArrayList<LangLevelModel>>()
         {
@@ -71,13 +81,14 @@ public class LangLevelFragment extends Fragment
                     public void onItemClick(LangLevelModel langLevelModel)
                     {
                         Fragment fragment = new LessonFragment();
-                        //Bundle bundle = new Bundle();
-                        //bundle.putString("level", langLevelModel.getLangLevel());
-                        //fragment.setArguments(bundle);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("level", langLevelModel.getLangLevel());
+                        bundle.putString("type", finalTestType);
+                        fragment.setArguments(bundle);
                         if(!activityName.equals("ExamPrepActivity"))
                         {
                             fragment = new LangCategoryFragment();
-                            Log.d(TAG, "onCreateView: ");
+                            bundle.remove("type");
                         }
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

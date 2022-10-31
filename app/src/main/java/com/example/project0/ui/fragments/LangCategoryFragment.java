@@ -33,6 +33,8 @@ public class LangCategoryFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.lang_category_fragment, container, false);
 
+        String type = null, level = null;
+
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
         langViewModel.getLangCategoryList();
 
@@ -41,14 +43,18 @@ public class LangCategoryFragment extends Fragment
         Bundle bundle = this.getArguments();
         if(bundle != null)
         {
-            String level = bundle.getString("level");
-            Log.d(TAG, "onCreateView: " + level);
+            type = bundle.getString("type");
+            level = bundle.getString("level");
+            Log.d(TAG, "onCreateView: " + type + level);
         }
 
         RecyclerView langRecycler = rootView.findViewById(R.id.lang_category_recycler);
         final LangCategoryAdapter langCategoryAdapter = new LangCategoryAdapter();
         langRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         langRecycler.setAdapter(langCategoryAdapter);
+
+        String finalType = type;
+        String finalLevel = level;
 
         langViewModel.langCategoryList.observe(getViewLifecycleOwner(), new Observer<ArrayList<LangCategoryModel>>()
         {
@@ -58,12 +64,15 @@ public class LangCategoryFragment extends Fragment
                 if(activityName.equals("TestYourselfActivity"))
                 {
                     langCategoryModels = new ArrayList<>(langCategoryModels.subList(0, 3));
+
+                    Log.d(TAG, "Test  " + activityName + " " + finalType + " " + finalLevel);
                 }
                 langCategoryAdapter.setList(langCategoryModels, new LangCategoryAdapter.itemClickListener()
                 {
                     @Override
                     public void onItemClick(LangCategoryModel langCategoryModel)
                     {
+                        Log.d(TAG, "Test  " + activityName  + " " + finalLevel + langCategoryModel.getLangCategory());
                     }
                 });
             }

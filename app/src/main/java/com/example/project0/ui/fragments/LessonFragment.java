@@ -1,6 +1,7 @@
 package com.example.project0.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.example.project0.pojo.LessonModel;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import static androidx.constraintlayout.widget.StateSet.TAG;
+
 public class LessonFragment extends Fragment
 {
     public LessonFragment()
@@ -32,6 +35,16 @@ public class LessonFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.lesson_fragment, container, false);
 
+        String level = null;
+        String activityName = getActivity().getClass().getSimpleName();
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null)
+        {
+            level = bundle.getString("level");
+            Log.d(TAG, "onCreateView: " + level);
+        }
+
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
         langViewModel.getLessonList();
 
@@ -39,6 +52,8 @@ public class LessonFragment extends Fragment
         final LessonAdapter lessonAdapter = new LessonAdapter();
         lessonRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         lessonRecycler.setAdapter(lessonAdapter);
+
+        String finalLevel = level;
 
         langViewModel.lessonList.observe(getViewLifecycleOwner(), new Observer<ArrayList<LessonModel>>()
         {
@@ -50,6 +65,7 @@ public class LessonFragment extends Fragment
                     @Override
                     public void onItemClick(LessonModel lessonModel)
                     {
+                        Log.d(TAG, "Test " + activityName + " " + finalLevel + " " + lessonModel.getLesson());
                     }
                 });
             }
