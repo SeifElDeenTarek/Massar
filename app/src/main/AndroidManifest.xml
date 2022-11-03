@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.TestActivity"></activity>
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/app_name_ar">
@@ -36,7 +37,7 @@
             android:parentActivityName=".ui.home.HomeActivity" />
         <activity
             android:name=".ui.PdfActivity"
-            android:parentActivityName=".ui.maqal.MaqalActivity"/>
+            android:parentActivityName=".ui.maqal.MaqalActivity" />
     </application>
 
 </manifest>

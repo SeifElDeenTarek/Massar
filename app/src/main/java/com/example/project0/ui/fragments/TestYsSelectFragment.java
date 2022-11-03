@@ -40,17 +40,11 @@ public class TestYsSelectFragment extends Fragment
         String activityName = getActivity().getClass().getSimpleName();
         int containerID = R.id.testYS_container;
 
-        if(activityName.equals("CoursesActivity"))
-        {
-            containerID = R.id.courses_container;
-        }
-
         RecyclerView testYsRecycler = rootView.findViewById(R.id.test_ys_recycler);
         TestYsSelectAdapter testYsSelectAdapter = new TestYsSelectAdapter();
         testYsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         testYsRecycler.setAdapter(testYsSelectAdapter);
 
-        int finalContainerID = containerID;
         langViewModel.testYsSelectList.observe(getViewLifecycleOwner(), new Observer<ArrayList<TestYsSelectModel>>()
         {
             @Override
@@ -65,14 +59,14 @@ public class TestYsSelectFragment extends Fragment
                         Bundle bundle = new Bundle();
                         bundle.putString("type", testYsSelectModel.getType());
                         bundle.putString("activity", activityName);
-                        fragment.setArguments(bundle);
                         if(testYsSelectModel.getType().equals("بشكل عام"))
                         {
                             fragment = new LangCategoryFragment();
                         }
+                        fragment.setArguments(bundle);
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(finalContainerID, fragment);
+                        fragmentTransaction.replace(containerID, fragment);
                         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();

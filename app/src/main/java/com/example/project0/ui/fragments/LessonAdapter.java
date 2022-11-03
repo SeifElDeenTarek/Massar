@@ -29,6 +29,10 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.LessonView
     public void onBindViewHolder(@NonNull LessonViewHolder holder, int position) 
     {
         holder.langSelect.setText(lessonModels.get(position).getLesson());
+
+        holder.itemView.setOnClickListener(v ->{
+            itemClickListener.onItemClick(lessonModels.get(position));
+        });
     }
 
     @Override

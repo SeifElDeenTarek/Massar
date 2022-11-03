@@ -1,5 +1,6 @@
 package com.example.project0.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.LessonModel;
+import com.example.project0.ui.TestActivity;
 
 import java.util.ArrayList;
 import java.util.zip.Inflater;
@@ -35,14 +37,14 @@ public class LessonFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.lesson_fragment, container, false);
 
-        String level = null;
+        String level = null, activity = null;
         String activityName = getActivity().getClass().getSimpleName();
 
         Bundle bundle = this.getArguments();
         if(bundle != null)
         {
             level = bundle.getString("level");
-            Log.d(TAG, "onCreateView: " + level);
+            Log.d(TAG, "Test Fragment level to lesson: " + level + activityName);
         }
 
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
@@ -65,14 +67,21 @@ public class LessonFragment extends Fragment
                     @Override
                     public void onItemClick(LessonModel lessonModel)
                     {
-                        Log.d(TAG, "Test " + activityName + " " + finalLevel + " " + lessonModel.getLesson());
+                        Log.d(TAG, "Test Fragment Final" + activityName + " " + finalLevel + " " + lessonModel.getLesson());
+                        intent(activityName, finalLevel, "");
                     }
                 });
             }
         });
-
-
-
         return rootView;
+    }
+
+    private void intent(String name, String level, String type)
+    {
+        Intent intent = new Intent(getContext(), TestActivity.class);
+        intent.putExtra("activity", name);
+        intent.putExtra("type", type);
+        intent.putExtra("level", level);
+        startActivity(intent);
     }
 }

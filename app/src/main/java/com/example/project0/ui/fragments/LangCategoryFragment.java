@@ -1,5 +1,6 @@
 package com.example.project0.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.LangCategoryModel;
+import com.example.project0.ui.TestActivity;
 
 import java.util.ArrayList;
 
@@ -33,20 +35,31 @@ public class LangCategoryFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.lang_category_fragment, container, false);
 
-        String type = null, level = null;
+        String type = null, level = null, activity = null;
 
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
         langViewModel.getLangCategoryList();
 
         String activityName = getActivity().getClass().getSimpleName();
 
+
+
         Bundle bundle = this.getArguments();
         if(bundle != null)
         {
             type = bundle.getString("type");
             level = bundle.getString("level");
-            Log.d(TAG, "onCreateView: " + type + level);
+            activity = bundle.getString("activity");
+            if(type != null)
+            {
+                Log.d(TAG, "Test Fragment Data Transfer Type Selected: " + activity + level + type);
+            }
+            else {
+                Log.d(TAG, "Test Fragment Data Transfer Overall Selected: " + activity + level);
+            }
         }
+
+        String test = type + " " + level + " " + activity;
 
         RecyclerView langRecycler = rootView.findViewById(R.id.lang_category_recycler);
         final LangCategoryAdapter langCategoryAdapter = new LangCategoryAdapter();
@@ -64,19 +77,27 @@ public class LangCategoryFragment extends Fragment
                 if(activityName.equals("TestYourselfActivity"))
                 {
                     langCategoryModels = new ArrayList<>(langCategoryModels.subList(0, 3));
-
-                    Log.d(TAG, "Test  " + activityName + " " + finalType + " " + finalLevel);
                 }
                 langCategoryAdapter.setList(langCategoryModels, new LangCategoryAdapter.itemClickListener()
                 {
                     @Override
                     public void onItemClick(LangCategoryModel langCategoryModel)
                     {
-                        Log.d(TAG, "Test  " + activityName  + " " + finalLevel + langCategoryModel.getLangCategory());
+                        Log.d(TAG, "Test Fragment Final: " + test + langCategoryModel.getLangCategory());
+                        intent(activityName, finalLevel, finalType);
                     }
                 });
             }
         });
         return rootView;
+    }
+
+    private void intent(String name, String level, String type)
+    {
+        Intent intent = new Intent(getContext(), TestActivity.class);
+        intent.putExtra("activity", name);
+        intent.putExtra("type", type);
+        intent.putExtra("level", level);
+        startActivity(intent);
     }
 }

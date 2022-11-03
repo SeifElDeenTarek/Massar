@@ -35,7 +35,7 @@ public class LangLevelFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.lang_level_fragment, container, false);
-        String testType = null;
+        String testType = null, activity = null;
 
         String activityName = getActivity().getClass().getSimpleName();
 
@@ -43,7 +43,8 @@ public class LangLevelFragment extends Fragment
         if(bundle != null)
         {
             testType = bundle.getString("type");
-            Log.d(TAG, "onCreateView: " + testType);
+            activity = bundle.getString("activity");
+            Log.d(TAG, "Test Fragment Data Transfer from test type to level" + testType + activity);
         }
 
         int containerID = R.id.courses_container;
@@ -51,10 +52,13 @@ public class LangLevelFragment extends Fragment
         if(activityName.equals("TestYourselfActivity"))
         {
             containerID = R.id.testYS_container;
+            activityName = activity;
         }
         else if(activityName.equals("ExamPrepActivity"))
         {
             containerID = R.id.exam_prep_container;
+            activityName = "ExamPrepActivity";
+            Log.d(TAG, "Test Fragment Data Transfer from prep to level" + testType + activity);
         }
 
         langViewModel = ViewModelProviders.of(this).get(LangViewModel.class);
@@ -69,7 +73,7 @@ public class LangLevelFragment extends Fragment
 
         int finalContainerID = containerID;
         String finalTestType = testType;
-
+        String finalActivity = activityName;
         langViewModel.langLevelList.observe(getViewLifecycleOwner(), new Observer<ArrayList<LangLevelModel>>()
         {
             @Override
@@ -80,16 +84,21 @@ public class LangLevelFragment extends Fragment
                     @Override
                     public void onItemClick(LangLevelModel langLevelModel)
                     {
-                        Fragment fragment = new LessonFragment();
+                        Fragment fragment = new LangCategoryFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString("level", langLevelModel.getLangLevel());
-                        bundle.putString("type", finalTestType);
-                        fragment.setArguments(bundle);
-                        if(!activityName.equals("ExamPrepActivity"))
+                        bundle.putString("activity", finalActivity);
+                        if(finalActivity.equals("TestYourselfActivity"))
                         {
-                            fragment = new LangCategoryFragment();
-                            bundle.remove("type");
+                            bundle.putString("type", finalTestType);
+                            bundle.putString("activity", finalActivity);
                         }
+                        else if(finalActivity.equals("ExamPrepActivity"))
+                        {
+                            fragment = new LessonFragment();
+                            bundle.putString("activity", finalActivity);
+                        }
+                        fragment.setArguments(bundle);
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(finalContainerID, fragment);
