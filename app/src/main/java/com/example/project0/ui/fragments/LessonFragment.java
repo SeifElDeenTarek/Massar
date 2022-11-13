@@ -17,10 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.LessonModel;
-import com.example.project0.ui.TestActivity;
+import com.example.project0.ui.PdfActivity;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import static androidx.constraintlayout.widget.StateSet.TAG;
 
@@ -78,7 +77,7 @@ public class LessonFragment extends Fragment
 
     private void intent(String name, String level, String type)
     {
-        Intent intent = new Intent(getContext(), TestActivity.class);
+        Intent intent = new Intent(getContext(), PdfActivity.class);
         intent.putExtra("activity", name);
         intent.putExtra("type", type);
         intent.putExtra("level", level);

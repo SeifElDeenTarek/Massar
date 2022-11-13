@@ -8,8 +8,9 @@
     app:cardElevation="6dp"
     android:layout_margin="8dp"
     android:clickable="true"
-    android:backgroundTint="@color/cards"
+    android:backgroundTint="@color/cards1"
     android:focusable="true"
+    checkedIcon="@drawa"
     app:cardCornerRadius="10dp">
 
     <RelativeLayout
@@ -35,7 +36,6 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:id="@+id/section_name"
             android:textStyle="bold"
-            android:fontFamily="@font/cairo_regular"
             tools:text="Course"/>
 
     </RelativeLayout>

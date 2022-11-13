@@ -34,9 +34,6 @@ public class PdfActivity extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(this, MaqalActivity.class);
-        intent.putExtra("back", true);
-        startActivity(intent);
         super.onBackPressed();
     }
 }

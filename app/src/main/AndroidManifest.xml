@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.project0">
 
     <application
@@ -8,11 +9,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.TestActivity"></activity>
+        android:theme="@style/DarkAppTheme">
         <activity
             android:name=".ui.home.HomeActivity"
-            android:label="@string/app_name_ar">
+            android:label="@string/app_name_ar"
+            android:theme="@style/DarkAppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +37,11 @@
             android:label="@string/home_maqal"
             android:parentActivityName=".ui.home.HomeActivity" />
         <activity
-            android:name=".ui.PdfActivity"
-            android:parentActivityName=".ui.maqal.MaqalActivity" />
+            android:name=".ui.PdfActivity" />
+        <activity
+            android:name=".ui.explain.ExplainActivity" />
+        <activity
+            android:name=".ui.test.TestActivity" />
     </application>
 
 </manifest>

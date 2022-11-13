@@ -1,9 +1,17 @@
 package com.example.project0.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,11 +25,15 @@ import com.example.project0.ui.maqal.MaqalActivity;
 import com.example.project0.ui.testYS.TestYourselfActivity;
 
 import java.util.ArrayList;
-import java.util.Objects;
+
+import static androidx.constraintlayout.widget.StateSet.TAG;
 
 public class HomeActivity extends AppCompatActivity
 {
     HomeViewModel homeViewModel;
+    SwitchCompat switchBtn;
+    boolean dark;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,20 +41,17 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-/**
-        getWindow().setStatusBarColor(Color.parseColor("#453F6B"));
-        ActionBar actionBar;
-
-        actionBar = getSupportActionBar();
-        actionBar.setTitle(Html.fromHtml("<font color='#453F6B'</font>"));
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#453F6B"));
-        actionBar.setBackgroundDrawable(colorDrawable);
-**/
-
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        getSupportActionBar().hide();
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         homeViewModel.getHomeListData();
+
+        switchBtn = findViewById(R.id.switch_btn);
+
+        if(switchBtn.isChecked())
+        {}
+        else
+        {}
 
         RecyclerView homeRecycler = findViewById(R.id.home_recycler);
         HomeAdapter homeAdapter = new HomeAdapter();

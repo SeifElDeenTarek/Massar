@@ -8,6 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/secondary</item>
         <item name="android:windowBackground">@color/primary</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
+    </style>
+
+    <style name="DarkAppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/dark1</item>
+        <item name="colorPrimaryDark">@color/dark1</item>
+        <item name="android:textColorPrimary">@color/secondary</item>
+        <item name="android:windowBackground">@color/dark1</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
     </style>
 
 </resources>

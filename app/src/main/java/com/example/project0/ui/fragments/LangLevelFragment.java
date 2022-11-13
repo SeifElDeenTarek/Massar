@@ -88,6 +88,7 @@ public class LangLevelFragment extends Fragment
                         Bundle bundle = new Bundle();
                         bundle.putString("level", langLevelModel.getLangLevel());
                         bundle.putString("activity", finalActivity);
+
                         if(finalActivity.equals("TestYourselfActivity"))
                         {
                             bundle.putString("type", finalTestType);
@@ -98,6 +99,7 @@ public class LangLevelFragment extends Fragment
                             fragment = new LessonFragment();
                             bundle.putString("activity", finalActivity);
                         }
+
                         fragment.setArguments(bundle);
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

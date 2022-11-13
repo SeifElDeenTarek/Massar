@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    // Add the Google services Gradle plugin
+    id 'com.google.gms.google-services'
+}
 
 android {
     compileSdkVersion 30
@@ -6,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.project0"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -25,6 +29,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     sourceSets {
         main {
             assets {
@@ -32,7 +37,6 @@ android {
             }
         }
     }
-
 }
 
 dependencies {
@@ -49,4 +53,22 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    implementation 'com.google.code.gson:gson:2.8.7'
+
+    def room_version = "2.4.3"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    def rxJavaVersion = '2.1.1'
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database'
 }

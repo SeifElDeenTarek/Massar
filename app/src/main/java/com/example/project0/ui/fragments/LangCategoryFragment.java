@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.LangCategoryModel;
-import com.example.project0.ui.TestActivity;
+import com.example.project0.ui.PdfActivity;
+import com.example.project0.ui.explain.ExplainActivity;
+import com.example.project0.ui.test.TestActivity;
 
 import java.util.ArrayList;
 
@@ -84,7 +86,7 @@ public class LangCategoryFragment extends Fragment
                     public void onItemClick(LangCategoryModel langCategoryModel)
                     {
                         Log.d(TAG, "Test Fragment Final: " + test + langCategoryModel.getLangCategory());
-                        intent(activityName, finalLevel, finalType);
+                        intent(activityName, finalLevel, finalType, langCategoryModel.getLangCategory());
                     }
                 });
             }
@@ -92,12 +94,21 @@ public class LangCategoryFragment extends Fragment
         return rootView;
     }
 
-    private void intent(String name, String level, String type)
+    private void intent(String name, String level, String type, String category)
     {
         Intent intent = new Intent(getContext(), TestActivity.class);
+        if(name.equals("CoursesActivity") && category.equals("قواعد"))
+        {
+            intent = new Intent(getContext(), PdfActivity.class);
+        }
+        else if(name.equals("CoursesActivity"))
+        {
+            intent = new Intent(getContext(), ExplainActivity.class);
+        }
         intent.putExtra("activity", name);
         intent.putExtra("type", type);
         intent.putExtra("level", level);
+        intent.putExtra("category", category);
         startActivity(intent);
     }
 }
