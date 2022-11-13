@@ -18,12 +18,12 @@ public class ExplainVocabDao
         reference = database.getReference(ExplainVocabModel.class.getSimpleName());
     }
 
-    public Task<Void> add(ExplainVocabModel explainVocabModel)
-    {
-        return reference.push().setValue(explainVocabModel);
-    }
-
     /**
+
+     public Task<Void> add(ExplainSentenceModel explainSentenceModel)
+     {
+     return reference.push().setValue(explainSentenceModel);
+     }
 
      public Task<Void> update(String key, HashMap<String, Object> hashMap)
      {

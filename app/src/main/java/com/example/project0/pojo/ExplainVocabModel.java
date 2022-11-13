@@ -4,11 +4,11 @@ public class ExplainVocabModel
 {
     String german;
     String arabic;
-    int germanVoice;
+    String germanVoice;
 
     public ExplainVocabModel() {}
 
-    public ExplainVocabModel(String german, String arabic, int germanVoice)
+    public ExplainVocabModel(String german, String arabic, String germanVoice)
     {
         this.german = german;
         this.arabic = arabic;
@@ -31,11 +31,11 @@ public class ExplainVocabModel
         this.arabic = arabic;
     }
 
-    public int getGermanVoice() {
+    public String getGermanVoice() {
         return germanVoice;
     }
 
-    public void setGermanVoice(int germanVoice) {
+    public void setGermanVoice(String germanVoice) {
         this.germanVoice = germanVoice;
     }
 }

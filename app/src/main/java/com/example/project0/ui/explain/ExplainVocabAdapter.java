@@ -1,18 +1,25 @@
 package com.example.project0.ui.explain;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project0.R;
 import com.example.project0.pojo.ExplainVocabModel;
 import com.google.android.material.card.MaterialCardView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,15 +48,15 @@ public class ExplainVocabAdapter extends RecyclerView.Adapter<ExplainVocabAdapte
         holder.image3.setImageResource(R.drawable.favorite);
 
         holder.card1.setOnClickListener(v -> {
-            itemClickListener.onItemClick(explainModels.get(position));
+            itemClickListener.onShareClick(explainModels.get(position));
         });
 
         holder.card2.setOnClickListener(v -> {
-            itemClickListener.onItemClick(explainModels.get(position));
+            itemClickListener.onVoiceClick(explainModels.get(position));
         });
 
         holder.card3.setOnClickListener(v -> {
-            itemClickListener.onItemClick(explainModels.get(position));
+            itemClickListener.onFavoriteClick(explainModels.get(position));
             if(Clicked3)
             {
                 holder.image3.setImageResource(R.drawable.favorite_fill);
@@ -75,6 +82,9 @@ public class ExplainVocabAdapter extends RecyclerView.Adapter<ExplainVocabAdapte
     public interface itemClickListener
     {
         void onItemClick(ExplainVocabModel explainModel);
+        void onShareClick(ExplainVocabModel explainModel);
+        void onVoiceClick(ExplainVocabModel explainModel);
+        void onFavoriteClick(ExplainVocabModel explainModel);
     }
 
     public void setList(List<ExplainVocabModel> explainModels, itemClickListener itemClickListener)

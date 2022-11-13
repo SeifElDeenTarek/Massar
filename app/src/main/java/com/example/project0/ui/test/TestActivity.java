@@ -181,6 +181,7 @@ public class TestActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                releaseMediaPlayer();
                 correctCount++;
                 if(index < tests.size() - 1)
                 {
@@ -206,6 +207,7 @@ public class TestActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                releaseMediaPlayer();
                 wrongCount++;
                 if(index < tests.size() - 1)
                 {
@@ -222,7 +224,6 @@ public class TestActivity extends AppCompatActivity
         });
     }
 
-    @SuppressLint("SetTextI18n")
     private void testRight()
     {
         countDownTimer.cancel();
@@ -466,8 +467,6 @@ public class TestActivity extends AppCompatActivity
 
     public void playSound(int sound)
     {
-        releaseMediaPlayer();
-
         int result = mAudioManager.requestAudioFocus(mOnAudioChangeListener,
                 AudioManager.STREAM_MUSIC,
                 AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);

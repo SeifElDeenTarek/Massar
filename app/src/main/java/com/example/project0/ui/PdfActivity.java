@@ -30,7 +30,6 @@ public class PdfActivity extends AppCompatActivity
                 .enableDoubletap(true)
                 .load();
     }
-
     @Override
     public void onBackPressed()
     {

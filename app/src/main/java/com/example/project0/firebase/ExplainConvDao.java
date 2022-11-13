@@ -18,12 +18,12 @@ public class ExplainConvDao
         reference = database.getReference(ExplainConvModel.class.getSimpleName());
     }
 
-    public Task<Void> add(ExplainConvModel explainConvModel)
-    {
-        return reference.push().setValue(explainConvModel);
-    }
-
     /**
+
+     public Task<Void> add(ExplainSentenceModel explainSentenceModel)
+     {
+     return reference.push().setValue(explainSentenceModel);
+     }
 
      public Task<Void> update(String key, HashMap<String, Object> hashMap)
      {

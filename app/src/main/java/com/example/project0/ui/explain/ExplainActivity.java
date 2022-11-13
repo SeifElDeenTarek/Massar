@@ -2,26 +2,33 @@ package com.example.project0.ui.explain;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.project0.R;
 import com.example.project0.firebase.ExplainConvDao;
 import com.example.project0.firebase.ExplainSentenceDao;
 import com.example.project0.firebase.ExplainVocabDao;
 import com.example.project0.pojo.ExplainConvModel;
-import com.example.project0.pojo.ExplainModel;
 import com.example.project0.pojo.ExplainSentenceModel;
 import com.example.project0.pojo.ExplainVocabModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static androidx.constraintlayout.widget.StateSet.TAG;
 
@@ -34,6 +41,39 @@ public class ExplainActivity extends AppCompatActivity
     ExplainSentenceDao sentenceDao;
     ExplainConvDao convDao;
     String key;
+    boolean Clicked2 = true, Clicked3 = true;
+
+    private AudioManager mAudioManager;
+    private MediaPlayer mMediaPlayer;
+
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener()
+    {
+        @Override
+        public void onCompletion(MediaPlayer mp)
+        {
+            releaseMediaPlayer();
+        }
+    };
+
+    AudioManager.OnAudioFocusChangeListener mOnAudioChangeListener = new AudioManager.OnAudioFocusChangeListener()
+    {
+        public void onAudioFocusChange(int focusChange)
+        {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS)
+            {
+                releaseMediaPlayer();
+            }
+            else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK)
+            {
+                mMediaPlayer.pause();
+                mMediaPlayer.seekTo(0);
+            }
+            else if (focusChange == AudioManager.AUDIOFOCUS_GAIN)
+            {
+                mMediaPlayer.start();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,31 +81,39 @@ public class ExplainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explain);
 
-        getSupportActionBar().setTitle("مفردات");
-
-        getSupportActionBar().setElevation(0);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         level = getIntent().getStringExtra("level");
         testType = getIntent().getStringExtra("type");
         activity = getIntent().getStringExtra("activity");
         category = getIntent().getStringExtra("category");
 
+        mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+
         explainRecycler = findViewById(R.id.explain_recycler);
-        explainVocabAdapter = new ExplainVocabAdapter();
         explainRecycler.setLayoutManager(new LinearLayoutManager(this));
-        explainRecycler.setAdapter(explainVocabAdapter);
 
-        vocabDao = new ExplainVocabDao();
-
-        loadVocabData();
-/**
         if(category.equals("مفردات"))
-        {}
+        {
+            explainVocabAdapter = new ExplainVocabAdapter();
+            explainRecycler.setAdapter(explainVocabAdapter);
+            vocabDao = new ExplainVocabDao();
+            loadVocabData();
+        }
         else if(category.equals("جمل"))
-        {}
+        {
+            explainSentenceAdapter = new ExplainSentenceAdapter();
+            explainRecycler.setAdapter(explainSentenceAdapter);
+            sentenceDao = new ExplainSentenceDao();
+            loadSentenceData();
+        }
         else
-            {}
- **/
+            {
+                explainConvAdapter = new ExplainConvAdapter();
+                explainRecycler.setAdapter(explainConvAdapter);
+                convDao = new ExplainConvDao();
+                loadConvData();
+            }
     }
 
     private void loadVocabData()
@@ -86,11 +134,43 @@ public class ExplainActivity extends AppCompatActivity
                     Log.d(TAG, "Item Key:  " + key);
                 }
 
-                explainVocabAdapter.setList(list, new ExplainVocabAdapter.itemClickListener()
-                {
+                explainVocabAdapter.setList(list, new ExplainVocabAdapter.itemClickListener() {
                     @Override
-                    public void onItemClick(ExplainVocabModel explainVocabModel)
+                    public void onItemClick(ExplainVocabModel explainModel)
                     {
+                    }
+
+                    @Override
+                    public void onShareClick(ExplainVocabModel explainModel)
+                    {
+                    }
+
+                    @Override
+                    public void onVoiceClick(ExplainVocabModel explainModel)
+                    {
+                        if(Clicked2)
+                        {
+                            playSound(explainModel.getGermanVoice());
+                            Clicked2 = false;
+                        } else
+                        {
+                            releaseMediaPlayer();
+                            Clicked2 = true;
+                        }
+                     }
+
+                    @Override
+                    public void onFavoriteClick(ExplainVocabModel explainModel)
+                    {
+                        if(Clicked3)
+                        {
+                            Toast.makeText(getApplicationContext(), "Added to favorite", Toast.LENGTH_SHORT).show();
+                            Clicked3 = false;
+                        } else
+                        {
+                            Toast.makeText(getApplicationContext(), "Removed Added to favorite", Toast.LENGTH_SHORT).show();
+                            Clicked3 = true;
+                        }
                     }
                 });
                 explainVocabAdapter.notifyDataSetChanged();
@@ -172,5 +252,51 @@ public class ExplainActivity extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError error)
             {}
         });
+    }
+
+
+    private void releaseMediaPlayer()
+    {
+        if (mMediaPlayer != null)
+        {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+            mAudioManager.abandonAudioFocus(mOnAudioChangeListener);
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        releaseMediaPlayer();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        releaseMediaPlayer();
+    }
+
+    public void playSound(String sound)
+    {
+        int result = mAudioManager.requestAudioFocus(mOnAudioChangeListener,
+                AudioManager.STREAM_MUSIC,
+                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
+        {
+            mMediaPlayer = new MediaPlayer();
+            try {
+                mMediaPlayer.setDataSource(getApplicationContext(), Uri.parse(sound));
+                mMediaPlayer.prepare();
+                mMediaPlayer.start();
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        mMediaPlayer.setOnCompletionListener(mCompletionListener);
     }
 }
