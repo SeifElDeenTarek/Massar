@@ -95,14 +95,14 @@ public class ExplainActivity extends AppCompatActivity
         explainRecycler = findViewById(R.id.explain_recycler);
         explainRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        if(category.equals("مفردات"))
+        if(category.equals(String.valueOf(R.string.catgory3)))
         {
             explainVocabAdapter = new ExplainVocabAdapter();
             explainRecycler.setAdapter(explainVocabAdapter);
             vocabDao = new ExplainVocabDao();
             loadVocabData();
         }
-        else if(category.equals("جمل"))
+        else if(category.equals(String.valueOf(R.string.catgory2)))
         {
             explainSentenceAdapter = new ExplainSentenceAdapter();
             explainRecycler.setAdapter(explainSentenceAdapter);

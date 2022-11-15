@@ -21,45 +21,54 @@
             android:scaleType="fitCenter"
             android:contentDescription="@string/image_content_desc"
             android:src="@drawable/app_icon"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
             android:id="@+id/icon"/>
 
         <TextView
             android:id="@+id/app_name_eng"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
             android:text="@string/app_name"
-            android:textAlignment="textEnd"
             android:textColor="@color/dark1"
             android:textSize="25sp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="5dp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/app_name"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/app_name_eng"
-            android:textStyle="bold"
-            android:text="@string/app_name_ar"
-            android:textSize="25sp"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/dark1"/>
 
         <TextView
             android:id="@+id/slogan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/app_name"
+            android:layout_below="@id/app_name_eng"
             android:text="@string/app_slogan"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
             android:textColor="@color/dark1"
             android:textSize="14sp"/>
+
+        <RelativeLayout
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:background="@drawable/part"
+            android:id="@+id/part"
+            android:layout_alignParentBottom="true">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                app:thumbTint="@color/thumb"
+                app:trackTint="@color/track"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:checked="true"
+                android:text="@string/dark_theme"
+                android:textColor="@color/dark1"
+                android:textStyle="bold"
+                android:id="@+id/switch_btn"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -77,34 +86,11 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:background="@drawable/part"
-        android:id="@+id/part"
-        android:layout_below="@+id/main_container">
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            app:thumbTint="@color/thumb"
-            app:trackTint="@color/track"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:checked="true"
-            android:text="@string/dark_theme"
-            android:textColor="@color/dark1"
-            android:textStyle="bold"
-            android:id="@+id/switch_btn"/>
-
-    </RelativeLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/part"
+        android:layout_below="@+id/container_curve"
         android:layout_marginTop="27dp"
         android:padding="8dp" />
 

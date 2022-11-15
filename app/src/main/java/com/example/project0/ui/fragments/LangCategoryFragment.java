@@ -86,7 +86,7 @@ public class LangCategoryFragment extends Fragment
                     public void onItemClick(LangCategoryModel langCategoryModel)
                     {
                         Log.d(TAG, "Test Fragment Final: " + test + langCategoryModel.getLangCategory());
-                        intent(activityName, finalLevel, finalType, langCategoryModel.getLangCategory());
+                        intent(activityName, finalLevel, finalType, String.valueOf(langCategoryModel.getLangCategory()));
                     }
                 });
             }

@@ -57,9 +57,9 @@ public class TestYsSelectFragment extends Fragment
                     {
                         Fragment fragment = new LangLevelFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putString("type", testYsSelectModel.getType());
+                        bundle.putString("type", String.valueOf(testYsSelectModel.getType()));
                         bundle.putString("activity", activityName);
-                        if(testYsSelectModel.getType().equals("بشكل عام"))
+                        if(String.valueOf(testYsSelectModel.getType()).equals("بشكل عام"))
                         {
                             fragment = new LangCategoryFragment();
                         }

@@ -2,19 +2,19 @@ package com.example.project0.pojo;
 
 public class TestYsSelectModel
 {
-    String type;
+    int type;
 
-    public TestYsSelectModel(String type)
+    public TestYsSelectModel(int type)
     {
         this.type = type;
     }
 
-    public String getType()
+    public int getType()
     {
         return type;
     }
 
-    public void setType(String type)
+    public void setType(int type)
     {
         this.type = type;
     }

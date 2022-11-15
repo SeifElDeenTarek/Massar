@@ -126,17 +126,17 @@ public class TestActivity extends AppCompatActivity
         activity = getIntent().getStringExtra("activity");
         category = getIntent().getStringExtra("category");
 
-        if(category.equals("قواعد"))
+        if(category.equals(String.valueOf(R.string.catgory1)))
         {
             tests = getTestRulesListFromDatabase();
             test = getTestRulesListFromDatabase().get(index);
         }
-        else if(category.equals("جمل"))
+        else if(category.equals(String.valueOf(R.string.catgory2)))
         {
             tests = getTestSentenceListFromDatabase();
             test = getTestSentenceListFromDatabase().get(index);
         }
-        else if(category.equals("مفردات"))
+        else if(category.equals(String.valueOf(R.string.catgory3)))
         {
             tests = getTestVocabListFromDatabase();
             test = getTestVocabListFromDatabase().get(index);

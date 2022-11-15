@@ -2,19 +2,19 @@ package com.example.project0.pojo;
 
 public class LangCategoryModel
 {
-    String langCategory;
+    int langCategory;
 
-    public LangCategoryModel(String langCategory)
+    public LangCategoryModel(int langCategory)
     {
         this.langCategory = langCategory;
     }
 
-    public String getLangCategory()
+    public int getLangCategory()
     {
         return langCategory;
     }
 
-    public void setLangCategory(String langCategory)
+    public void setLangCategory(int langCategory)
     {
         this.langCategory = langCategory;
     }

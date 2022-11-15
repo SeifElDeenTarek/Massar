@@ -3,6 +3,7 @@ package com.example.project0.ui.fragments;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.project0.R;
 import com.example.project0.pojo.LangCategoryModel;
 import com.example.project0.pojo.LangLevelModel;
 import com.example.project0.pojo.LessonModel;
@@ -61,10 +62,10 @@ public class LangViewModel extends ViewModel
     {
         ArrayList<LangCategoryModel> langCategoryList = new ArrayList<>();
 
-        langCategoryList.add(new LangCategoryModel("قواعد"));
-        langCategoryList.add(new LangCategoryModel("جمل"));
-        langCategoryList.add(new LangCategoryModel("مفردات"));
-        langCategoryList.add(new LangCategoryModel("محادثة"));
+        langCategoryList.add(new LangCategoryModel(R.string.catgory1));
+        langCategoryList.add(new LangCategoryModel(R.string.catgory2));
+        langCategoryList.add(new LangCategoryModel(R.string.catgory3));
+        langCategoryList.add(new LangCategoryModel(R.string.catgory4));
 
         return langCategoryList;
     }
@@ -73,8 +74,8 @@ public class LangViewModel extends ViewModel
     {
         ArrayList<TestYsSelectModel> testYsSelectList = new ArrayList<>();
 
-        testYsSelectList.add(new TestYsSelectModel("حسب المستوي"));
-        testYsSelectList.add(new TestYsSelectModel("بشكل عام"));
+        testYsSelectList.add(new TestYsSelectModel(R.string.ty_bylevel));
+        testYsSelectList.add(new TestYsSelectModel(R.string.ty_generally));
 
         return testYsSelectList;
     }

@@ -1,20 +1,25 @@
 <resources>
     <string name="app_name">Massar</string>
-    <string name="app_name_ar">مسار</string>
 
-    <string name="home_courses">كورسات</string>
-    <string name="home_test_yourself">اختبر نفسك</string>
-    <string name="home_exam_prep">تحضير للامتحان</string>
-    <string name="home_maqal">مقالات</string>
-    <string name="image_content_desc">Image Content Desc.</string>
-    <string name="score">النتيجة</string>
-    <string name="back_result_dialog">القائمة الرئيسية</string>
-    <string name="again_result_dialog">اعادة الامتحان</string>
-    <string name="test_next_button">التالي</string>
-    <string name="app_slogan">تعلم اللغة الالمانية بطريقة تفاعلية</string>
-    <string name="dark_theme">Dark Theme</string>
-    <string name="switch_on">On</string>
-    <string name="switch_off">Off</string>
-    <string name="time_out">لقد نفذ الوقت</string>
-    <string name="try_again_time">حاول مرة اخري</string>
+    <string name="home_courses">Courses</string>
+    <string name="home_test_yourself">Test Yourself</string>
+    <string name="home_exam_prep">Exam Preparations</string>
+    <string name="home_maqal">Articles</string>
+    <string name="image_content_desc" translatable="false">Image Content Desc.</string>
+    <string name="back_result_dialog">Main Menu</string>
+    <string name="again_result_dialog">Re-examination</string>
+    <string name="ty_bylevel">By level</string>
+    <string name="ty_generally">Generally</string>
+    <string name="catgory1">Rules</string>
+    <string name="catgory2">Sentences</string>
+    <string name="catgory3">Vocabulary</string>
+    <string name="catgory4">Conversation</string>
+    <string name="test_next_button">Next</string>
+    <string name="app_slogan">Learn German in an interactive way</string>
+    <string name="dark_theme" translatable="false">Dark Theme</string>
+    <string name="switch_on" translatable="false">On</string>
+    <string name="switch_off" translatable="false">Off</string>
+    <string name="time_out">Time out</string>
+    <string name="try_again_time">Try again</string>
+    <string name="score">Score</string>
 </resources>
