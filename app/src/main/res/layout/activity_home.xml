@@ -52,7 +52,7 @@
 
         <TextView
             android:id="@+id/slogan"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/app_name"
@@ -63,17 +63,30 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/main_container"
+        android:id="@+id/container_curve"
+        android:background="@color/orange1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/curve"/>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="140dp"
         android:layout_height="40dp"
         android:background="@drawable/part"
         android:id="@+id/part"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/main_container">
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="120dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:thumbTint="@color/thumb"
             app:trackTint="@color/track"
             android:layout_alignParentEnd="true"

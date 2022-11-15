@@ -49,9 +49,13 @@ public class HomeActivity extends AppCompatActivity
         switchBtn = findViewById(R.id.switch_btn);
 
         if(switchBtn.isChecked())
-        {}
+        {
+            setTheme(R.style.DarkAppTheme);
+        }
         else
-        {}
+        {
+            setTheme(R.style.AppTheme);
+        }
 
         RecyclerView homeRecycler = findViewById(R.id.home_recycler);
         HomeAdapter homeAdapter = new HomeAdapter();

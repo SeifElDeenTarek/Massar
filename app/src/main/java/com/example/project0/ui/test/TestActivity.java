@@ -34,11 +34,12 @@ public class TestActivity extends AppCompatActivity
     CountDownTimer countDownTimer;
     Dialog dialog, scoreDialog;
     LinearProgressIndicator progressIndicator;
-    TextView ques, ans1, ans2, ans3, ans4, score, grade;
-    MaterialCardView select1, select2, select3, select4;
+    TextView ques, ans1, ans2, ans3, ans4, score, grade, timer, nomQues;
+    MaterialCardView select1, select2, select3, select4, quesCard;
+    MaterialCardView result, timeOut, backTimeOut, againTimeOut, backResult, againResult;
     List<Test> tests;
     Test test;
-    int index = 0, correctCount = 0, wrongCount = 0, timesValue = 0;
+    int index = 0, correctCount = 0, wrongCount = 0, timeValue = 10, quesNom = 1, totalQues = 10;
     Button next;
 
     private AudioManager mAudioManager;
@@ -85,14 +86,19 @@ public class TestActivity extends AppCompatActivity
 
         hooks();
 
+        reverseTimer(timeValue, timer);
+        nomQues.setText(quesNom + "/" + totalQues);
+
+/**
         countDownTimer = new CountDownTimer(60000, 1000)
         {
             @Override
             public void onTick(long millisUntilFinished)
             {
-                timesValue = timesValue + 5;
-                progressIndicator.setProgress(timesValue, true);
-                progressIndicator.setIndicatorDirection(LinearProgressIndicator.INDICATOR_DIRECTION_LEFT_TO_RIGHT);
+                second = (int) millisUntilFinished / 1000;
+                timeMin = second / 60;
+                //progressIndicator.setProgress((int) timesValue, true);
+                //progressIndicator.setIndicatorDirection(LinearProgressIndicator.INDICATOR_DIRECTION_LEFT_TO_RIGHT);
             }
 
             @Override
@@ -113,6 +119,7 @@ public class TestActivity extends AppCompatActivity
                 dialog.show();
             }
         }.start();
+**/
 
         level = getIntent().getStringExtra("level");
         testType = getIntent().getStringExtra("type");
@@ -137,6 +144,61 @@ public class TestActivity extends AppCompatActivity
         setAllDate();
     }
 
+    public void reverseTimer(int seconds,final TextView timer)
+    {
+        countDownTimer = new CountDownTimer(seconds* 1000+1000, 1000)
+        {
+            public void onTick(long millisUntilFinished)
+            {
+                int seconds = (int) (millisUntilFinished / 1000);
+                int minutes = seconds / 60;
+                seconds = seconds % 60;
+                timer.setText(String.format("%02d", minutes)
+                        + ":" + String.format("%02d", seconds));
+            }
+
+            public void onFinish()
+            {
+                quesCard.setVisibility(View.GONE);
+                timeOut.setVisibility(View.VISIBLE);
+
+                backTimeOut.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                againTimeOut.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        onBackPressed();
+                    }
+                });
+                /**
+                dialog = new Dialog(TestActivity.this);
+                dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+                dialog.setContentView(R.layout.time_out_dialog);
+
+                dialog.findViewById(R.id.try_again).setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        onBackPressed();
+                    }
+                });
+                dialog.show();
+            }**/
+            }
+        }.start();
+    }
+
     private void setAllDate()
     {
         ques.setText(test.getQues());
@@ -151,6 +213,7 @@ public class TestActivity extends AppCompatActivity
         progressIndicator = findViewById(R.id.progress);
 
         ques = findViewById(R.id.ques);
+        timer = findViewById(R.id.test_timer);
 
         ans1 = findViewById(R.id.ans1);
         ans2 = findViewById(R.id.ans2);
@@ -161,8 +224,21 @@ public class TestActivity extends AppCompatActivity
         select2 = findViewById(R.id.select2);
         select3 = findViewById(R.id.select3);
         select4 = findViewById(R.id.select4);
+        quesCard = findViewById(R.id.ques_card);
+
+        result = findViewById(R.id.result_card);
+        backResult = findViewById(R.id.back_from_result);
+        againResult = findViewById(R.id.try_again_result);
+
+        timeOut = findViewById(R.id.time_out_card);
+        backTimeOut = findViewById(R.id.back_from_time_out);
+        againTimeOut = findViewById(R.id.try_again_time_out);
+
+        score = findViewById(R.id.test_score);
+        grade = findViewById(R.id.test_grade);
 
         next = findViewById(R.id.next);
+        nomQues = findViewById(R.id.nom_of_ques);
     }
 
     @Override
@@ -183,6 +259,8 @@ public class TestActivity extends AppCompatActivity
             {
                 releaseMediaPlayer();
                 correctCount++;
+                quesNom++;
+                nomQues.setText(quesNom + "/" + totalQues);
                 if(index < tests.size() - 1)
                 {
                     index++;
@@ -209,6 +287,8 @@ public class TestActivity extends AppCompatActivity
             {
                 releaseMediaPlayer();
                 wrongCount++;
+                quesNom++;
+                nomQues.setText(quesNom + "/" + totalQues);
                 if(index < tests.size() - 1)
                 {
                     index++;
@@ -228,6 +308,35 @@ public class TestActivity extends AppCompatActivity
     {
         countDownTimer.cancel();
 
+        quesCard.setVisibility(View.GONE);
+        result.setVisibility(View.VISIBLE);
+
+        int total = correctCount + wrongCount;
+        Log.d(TAG, "TEST ANSWERS:  " + correctCount + " " + wrongCount + " " + total);
+
+        score.setText(correctCount + "/" + total);
+        grade.setText(getGrade(total));
+
+        backResult.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        againResult.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onBackPressed();
+            }
+        });
+
+/**
         scoreDialog = new Dialog(TestActivity.this);
         scoreDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         scoreDialog.setContentView(R.layout.result_dialog_item);
@@ -235,14 +344,10 @@ public class TestActivity extends AppCompatActivity
         score = scoreDialog.findViewById(R.id.test_score);
         grade = scoreDialog.findViewById(R.id.test_grade);
 
-        float total = correctCount + wrongCount;
+        int total = correctCount + wrongCount;
         Log.d(TAG, "TEST ANSWERS:  " + correctCount + " " + wrongCount + " " + total);
 
-        total = correctCount / total;
-        total = total * 100;
-        Log.d(TAG, "TEST SCORE:  " + total);
-
-        score.setText(total + "%");
+        score.setText(correctCount + "/" + total);
         grade.setText(getGrade(total));
 
         scoreDialog.findViewById(R.id.try_again_test).setOnClickListener(new View.OnClickListener()
@@ -264,6 +369,7 @@ public class TestActivity extends AppCompatActivity
             }
         });
         scoreDialog.show();
+        **/
     }
 
     public String getGrade(float total)

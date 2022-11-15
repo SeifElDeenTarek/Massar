@@ -15,8 +15,9 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/dark1</item>
         <item name="colorPrimaryDark">@color/dark1</item>
-        <item name="android:textColorPrimary">@color/secondary</item>
+        <item name="android:textColor">@color/secondary</item>
         <item name="android:windowBackground">@color/dark1</item>
+        <item name="android:textColorPrimary">@color/secondary</item>
         <item name="android:fontFamily">@font/cairo_regular</item>
     </style>
 

@@ -7,12 +7,14 @@
     <string name="home_exam_prep">تحضير للامتحان</string>
     <string name="home_maqal">مقالات</string>
     <string name="image_content_desc">Image Content Desc.</string>
-    <string name="score">Score</string>
-    <string name="back_result_dialog">عودة</string>
-    <string name="again_result_dialog">مرة أخري</string>
+    <string name="score">النتيجة</string>
+    <string name="back_result_dialog">القائمة الرئيسية</string>
+    <string name="again_result_dialog">اعادة الامتحان</string>
     <string name="test_next_button">التالي</string>
     <string name="app_slogan">تعلم اللغة الالمانية بطريقة تفاعلية</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="switch_on">On</string>
     <string name="switch_off">Off</string>
+    <string name="time_out">لقد نفذ الوقت</string>
+    <string name="try_again_time">حاول مرة اخري</string>
 </resources>
